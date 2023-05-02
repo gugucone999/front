@@ -16,7 +16,6 @@ spec:
     containers:
     - name: container
       image: gugucone/front:latest
-      command: ["nginx -g 'daemon off;'"]
       envFrom:
       - configMapRef:
           name: frontend-cm
