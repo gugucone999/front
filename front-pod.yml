@@ -13,4 +13,3 @@ spec:
     envFrom:
     - configMapRef:
         name: frontend-cm
-
