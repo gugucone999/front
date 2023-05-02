@@ -1,44 +1,16 @@
-# apiVersion: v1
-# kind: Pod
-# metadata:
-#   name: frontend-pod
-#   namespace: ljh-dev
-#   labels:
-#     type: frontend
-# spec:
-#   containers:
-#   - name: container
-#     image: gugucone/front:1.2
-#     command: ["/bin/sh", "-ec", "envsubst '$BACKEND_SVC_NAME' < /etc/nginx/conf.d/default.conf.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"]
-#     envFrom:
-#     - configMapRef:
-#         name: frontend-cm
-
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: v1
+kind: Pod
 metadata:
- name: deployment-front
- namespace: ljh-dev
+  name: frontend-pod
+  namespace: ljh-dev
+  labels:
+    type: frontend
 spec:
- selector:
-   matchLabels:
-    type: web
- replicas: 1
- template:
-   metadata:
-     labels:
-       type: web
-   spec:
-    containers:
-    - name: container
-      image: front:latest
-      envFrom:
-      - configMapRef:
-          name: frontend-cm
-      ports:
-      - containerPort: 80
-      resources:
-        requests:
-          cpu: 100m
-        limits:
-          cpu: 200m
+  containers:
+  - name: container
+    image: gugucone/front:1.2
+    command: ["/bin/sh", "-ec", "envsubst '$BACKEND_SVC_NAME' < /etc/nginx/conf.d/default.conf.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"]
+    envFrom:
+    - configMapRef:
+        name: frontend-cm
+
