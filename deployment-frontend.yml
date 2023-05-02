@@ -15,7 +15,7 @@ spec:
    spec:
     containers:
     - name: container
-      image: front:latest
+      image: gugucone/front:latest
       envFrom:
       - configMapRef:
           name: frontend-cm
